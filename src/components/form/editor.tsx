@@ -15,7 +15,7 @@ const Editor = () => {
     },
   });
 
-  console.log(form.watch());
+
 
   const onSubmit = (data: z.infer<typeof editorSchema>) => {};
   return (
