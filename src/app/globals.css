@@ -184,7 +184,6 @@
   opacity: 1;
 }
 
-
 details {
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -210,4 +209,55 @@ details[open] summary {
 
 .toggle-content {
   margin-top: 1em;
+}
+
+.concave-rectangle {
+  width: 100%;
+  height: 450px;
+  position: relative;
+}
+.concave-rectangle::before,
+.concave-rectangle::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background-color: #f7f4ed;
+  border: 1px solid transparent;
+}
+.concave-rectangle::before {
+  top: 10%;
+  z-index: 20;
+  overflow: hidden;
+  border-radius: 0 0 100% 100%;
+  border-top: none;
+}
+.concave-rectangle::after {
+  bottom: 0;
+  border-radius: 100% 100% 0 0;
+  border-bottom: none;
+}
+.concave-rectangle span {
+  position: absolute;
+  top: 50px;
+  bottom: 50px;
+  left: 0;
+  height: 100%;
+  right: 0;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+}
+
+.animate-scroll {
+  animation: scroll 25s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }

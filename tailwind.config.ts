@@ -1,5 +1,9 @@
 import type { Config } from "tailwindcss";
 
+const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
+
 const config = {
   darkMode: ["class"],
   content: [
@@ -17,8 +21,23 @@ const config = {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      mainFont: ["var(--font-poppins)"],
+      roboto: ["var(--font-roboto)"],
+      mont: ["var(--font-mont)"],
+      ruda: ["var(--font-ruda)"],
+      inter: ["var(--font-inter)"],
+      noto: ["var(--font-noto)"],
+      dela: ["var(--font-dela)"],
+      syne: ["var(--font-syne)"],
+      bric: ["var(--font-bric)"],
+      instrumentSerif: ["var(--font-instrumentSerif)"],
+    },
     extend: {
       colors: {
+        "eerie-black": "#1C1C1C",
+        pastrami: "#e97274",
+        sooty: "#141414",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -59,6 +78,14 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        aurora: {
+          from: {
+            backgroundPosition: "50% 50%, 50% 50%",
+          },
+          to: {
+            backgroundPosition: "350% 50%, 350% 50%",
+          },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -69,6 +96,8 @@ const config = {
         },
       },
       animation: {
+        aurora: "aurora 60s linear infinite",
+
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
@@ -78,7 +107,19 @@ const config = {
     require("tailwindcss-animate"),
     require("tailwind-scrollbar")({ nocompatible: true }),
     require("@tailwindcss/typography"),
+    addVariablesForColors,
   ],
 } satisfies Config;
 
 export default config;
+
+function addVariablesForColors({ addBase, theme }: any) {
+  const allColors = flattenColorPalette(theme("colors"));
+  const newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+}

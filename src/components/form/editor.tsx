@@ -15,9 +15,6 @@ const Editor = () => {
     },
   });
 
-
-
-  const onSubmit = (data: z.infer<typeof editorSchema>) => {};
   return (
     <div className="space-y-2 w-full">
       {/* <FormLabel>Blog Editor</FormLabel> */}

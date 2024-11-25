@@ -312,7 +312,6 @@ const MenuBar: React.FC<IMenuBarProp> = ({ editor }) => {
           <ContextMenuShortcut>⌘ Z</ContextMenuShortcut>
         </ContextMenuItem>
 
-        
         <ContextMenuItem
           inset
           onClick={() => editor.chain().focus().redo().run()}

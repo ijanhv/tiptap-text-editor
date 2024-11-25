@@ -20,7 +20,7 @@ import Highlight from "@tiptap/extension-highlight";
 import TaskItem from "@tiptap/extension-task-item";
 import TaskList from "@tiptap/extension-task-list";
 import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
-import { Node, mergeAttributes } from "@tiptap/core"
+import { Node, mergeAttributes } from "@tiptap/core";
 
 import css from "highlight.js/lib/languages/css";
 import js from "highlight.js/lib/languages/javascript";
@@ -50,29 +50,38 @@ const ToggleList = Node.create({
   content: "paragraph+",
   defining: true,
   parseHTML() {
-    return [{ tag: "details" }]
+    return [{ tag: "details" }];
   },
   renderHTML({ HTMLAttributes }) {
-    return ["details", mergeAttributes(HTMLAttributes), ["summary", 0], ["div", { class: "toggle-content" }, 1]]
+    return [
+      "details",
+      mergeAttributes(HTMLAttributes),
+      ["summary", 0],
+      ["div", { class: "toggle-content" }, 1],
+    ];
   },
+  // @ts-ignore
   addCommands() {
     return {
       toggleToggleList:
         () =>
+        // @ts-ignore
         ({ commands }) => {
-          return commands.toggleWrap("toggleList")
+          return commands.toggleWrap("toggleList");
         },
-    }
+    };
   },
   addKeyboardShortcuts() {
     return {
+      // @ts-ignore
       "Mod-Shift-T": () => this.editor.commands.toggleToggleList(),
-    }
+    };
   },
-})
+});
 
 const TextEditor: React.FC<ITextEditorProp> = ({ form }) => {
-  const [showMenuBar, setShowMenuBar] = useState(false);
+  // @ts-ignore
+  const [, setShowMenuBar] = useState(false);
 
   const editor = useEditor({
     extensions: [
